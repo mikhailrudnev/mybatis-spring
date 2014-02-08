@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.msh.persistence.DataMapper">
+    <resultMap id="userResultMap" type="com.msh.bean.User">
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+
+    <select id="getAllUsers" resultMap="userResultMap">
+        select * from user
+    </select>
+
+    <select id="getUserById" parameterType="int" resultMap="userResultMap">
+        select * from user where id = #{id}
+    </select>
+
+    <select id="insertUser" parameterType="com.msh.bean.User">
+        insert into user (name, email, phone) values (#{name}, #{email}, #{phone})
+    </select>
+
+    <select id="insertUsers" parameterType="java.util.List">
+        insert into user (name, email, phone) values (
+        <foreach collection="list" item="user" open="" close="" separator="),(">
+            #{user.name},#{user.email},#{user.phone}
+        </foreach>
+        )
+    </select>
+
+    <insert id="insertEntity" parameterType="java.util.List">
+        insert into user (
+        <foreach collection="columns" item="column" open="" close="" separator=",">
+            ${column}
+        </foreach>
+        ) values (
+        <foreach collection="values" item="value" open="" close="" separator=",">
+            #{value}
+        </foreach>
+        )
+    </insert>
+</mapper>
