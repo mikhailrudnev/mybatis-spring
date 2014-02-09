@@ -5,7 +5,6 @@ import com.msh.persistence.DataMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class DataRepository {
@@ -35,7 +34,19 @@ public class DataRepository {
         dataMapper.insertUsers(usersList);
     }
 
-    public void insertEntity(List columns, List values){
+    public void insertEntity(String columns[], String values[]) {
         dataMapper.insertEntity(columns, values);
+    }
+
+    public List getUsersByFieldsIfExist(User user) {
+        return dataMapper.getUsersByFieldsIfExist(user);
+    }
+
+    public List getUsersLike(User user) {
+        return dataMapper.getUsersLike(user);
+    }
+
+    public List getUsersByChoosenParameter(String name, String email, String phone) {
+        return dataMapper.getUsersByChoosenParameter(name, email, phone);
     }
 }

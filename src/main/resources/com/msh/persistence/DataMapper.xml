@@ -29,7 +29,7 @@
         )
     </select>
 
-    <insert id="insertEntity" parameterType="java.util.List">
+    <insert id="insertEntity">
         insert into user (
         <foreach collection="columns" item="column" open="" close="" separator=",">
             ${column}
@@ -40,4 +40,51 @@
         </foreach>
         )
     </insert>
+
+    <select id="getUsersByPhoneIfExist" resultMap="userResultMap" parameterType="com.msh.bean.User">
+        select * from user
+        <if test="user.phone != null">
+            where phone = #{user.phone}
+        </if>
+    </select>
+
+    <select id="getUsersByFieldsIfExist" resultMap="userResultMap" parameterType="com.msh.bean.User">
+        select * from user where name = #{user.name}
+        <choose>
+            <when test="user.email != null">
+                and email = #{user.email}
+            </when>
+            <when test="user.phone != null">
+                and phone = #{user.phone}
+            </when>
+        </choose>
+    </select>
+
+    <select id="getUsersLike" resultMap="userResultMap" parameterType="com.msh.bean.User">
+        SELECT * FROM user
+        <where>
+            <if test="user.name != null">
+                name = #{user.name}
+            </if>
+            <if test="user.email != null">
+                AND email = #{user.email}
+            </if>
+            <if test="user.phone">
+                AND phone = #{user.phone}
+            </if>
+        </where>
+    </select>
+
+    <select id="getUsersByChoosenParameter" resultMap="userResultMap">
+        SELECT * FROM user WHERE name = #{name}
+        <choose>
+            <when test="email != null">
+                AND email = #{email}
+            </when>
+            <otherwise>
+                AND phone = #{phone}
+            </otherwise>
+        </choose>
+    </select>
+
 </mapper>
