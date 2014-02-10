@@ -1,5 +1,6 @@
 package com.msh.repositories;
 
+import com.msh.bean.Article;
 import com.msh.bean.User;
 import com.msh.persistence.DataMapper;
 import org.apache.ibatis.session.SqlSession;
@@ -48,5 +49,9 @@ public class DataRepository {
 
     public List getUsersByChoosenParameter(String name, String email, String phone) {
         return dataMapper.getUsersByChoosenParameter(name, email, phone);
+    }
+
+    public List<Article> getArticles(){
+        return dataMapper.getArticles();
     }
 }

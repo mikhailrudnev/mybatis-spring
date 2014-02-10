@@ -9,6 +9,13 @@
         <result property="phone" column="phone"/>
     </resultMap>
 
+    <resultMap id="articleResultMap" type="com.msh.bean.Article">
+        <result property="title" column="title"/>
+        <collection property="comments" ofType="com.msh.bean.Comment">
+            <result property="description" column="description"/>
+        </collection>
+    </resultMap>
+
     <select id="getAllUsers" resultMap="userResultMap">
         select * from user
     </select>
@@ -85,6 +92,19 @@
                 AND phone = #{phone}
             </otherwise>
         </choose>
+    </select>
+
+    <update id="updateUser">
+        update user
+        <set>
+            <if test="user.name != null">
+                name = #{user.name},
+            </if>
+        </set>
+    </update>
+
+    <select id="getArticles" resultMap="articleResultMap">
+        select * from article, comment where article.id_article = comment.id_article
     </select>
 
 </mapper>

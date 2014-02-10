@@ -1,3 +1,4 @@
+import com.msh.bean.Article;
 import com.msh.bean.User;
 import com.msh.repositories.DataRepository;
 import org.apache.ibatis.session.SqlSession;
@@ -44,6 +45,9 @@ public class Main {
         user.setEmail("email4");
         user.setPhone("phone4");
         System.out.println(dataRepository.getUsersByChoosenParameter("user4", null, "phone5"));
+
+        List<Article> articles = dataRepository.getArticles();
+        System.out.println(dataRepository.getArticles());
 
     }
 }

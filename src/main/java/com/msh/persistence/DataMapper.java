@@ -1,5 +1,6 @@
 package com.msh.persistence;
 
+import com.msh.bean.Article;
 import com.msh.bean.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,4 +16,6 @@ public interface DataMapper {
     public List getUsersByFieldsIfExist(@Param("user") User user);
     public List getUsersLike(@Param("user") User user);
     public List getUsersByChoosenParameter(@Param("name") String name, @Param("email") String email, @Param("phone") String phone);
+
+    public List<Article> getArticles();
 }
