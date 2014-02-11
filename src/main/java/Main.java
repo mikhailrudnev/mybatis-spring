@@ -40,14 +40,14 @@ public class Main {
 //        String values[] = {"name value 111111111", "email value 1111111"};
 
 //        dataRepository.insertEntity(columns, values);
-        User user = new User();
-        user.setName("user4");
-        user.setEmail("email4");
-        user.setPhone("phone4");
-        System.out.println(dataRepository.getUsersByChoosenParameter("user4", null, "phone5"));
-
-        List<Article> articles = dataRepository.getArticles();
-        System.out.println(dataRepository.getArticles());
+//        User user = new User();
+//        user.setName("user4");
+//        user.setEmail("email4");
+//        user.setPhone("phone4");
+//        System.out.println(dataRepository.getUsersByChoosenParameter("user4", null, "phone5"));
+//
+//        List<Article> articles = dataRepository.getArticles();
+        System.out.println(dataRepository.getPosts());
 
     }
 }

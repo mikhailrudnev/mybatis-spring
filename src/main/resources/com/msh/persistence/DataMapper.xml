@@ -15,6 +15,16 @@
             <result property="description" column="description"/>
         </collection>
     </resultMap>
+    
+    <resultMap id="postResultMao" type="com.msh.bean.Post">
+        <result property="title" column="title"/>
+        <result property="description" column="description"/>
+        <association property="user" javaType="com.msh.bean.User">
+            <result property="name" column="name"/>
+            <result property="email" column="email"/>
+            <result property="phone" column="phone"/>
+        </association>
+    </resultMap>
 
     <select id="getAllUsers" resultMap="userResultMap">
         select * from user
@@ -105,6 +115,10 @@
 
     <select id="getArticles" resultMap="articleResultMap">
         select * from article, comment where article.id_article = comment.id_article
+    </select>
+
+    <select id="getPosts" resultMap="postResultMao">
+        select * from post, user where post.id_user = user.id
     </select>
 
 </mapper>
