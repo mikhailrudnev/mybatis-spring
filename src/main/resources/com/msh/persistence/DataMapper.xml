@@ -104,7 +104,7 @@
     </update>
 
     <select id="getArticles" resultMap="articleResultMap">
-        select * from article, comment, user where article.id_article = comment.id_article AND article.id_user = user.id
+        select * from article, comment where article.id_article = comment.id_article
     </select>
 
 </mapper>
