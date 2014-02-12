@@ -23,6 +23,10 @@
             <result property="name" column="name"/>
             <result property="email" column="email"/>
             <result property="phone" column="phone"/>
+            <association property="profile" javaType="com.msh.bean.Profile">
+                <result property="city" column="city"/>
+                <result property="street" column="street"/>
+            </association>
         </association>
     </resultMap>
 
@@ -114,11 +118,11 @@
     </update>
 
     <select id="getArticles" resultMap="articleResultMap">
-        select * from article, comment, user where article.id_article = comment.id_article AND article.id_user = user.id
+        select * from article, comment where article.id_article = comment.id_article
     </select>
 
     <select id="getPosts" resultMap="postResultMao">
-        select * from post, user where post.id_user = user.id
+        select * from post, user, profile where post.id_user = user.id and user.id = profile.id_user
     </select>
 
 </mapper>
